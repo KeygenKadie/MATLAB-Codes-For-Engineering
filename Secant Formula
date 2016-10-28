@@ -1,0 +1,42 @@
+clc
+prompt= 'What is the value of external diameter?';
+de= input(prompt);
+prompt= 'What is the internal diameter';
+di= input(prompt);
+d=((de^2)-(di^2))/4
+a= pi*d;
+temptext= ['Area is', num2str(a),];
+disp(temptext);
+r= de/4
+temptext= ['Radius of Gyration is', num2str(r),];
+disp(temptext);
+prompt= 'What is value of the load?';
+p= input(prompt);
+prompt= 'What is the length of the boom?';
+e= input(prompt);
+prompt= 'What is the value of K?';
+k= input(prompt);
+prompt= 'What is the length of the tower?';
+l=input(prompt);
+prompt= 'What is the Youngs Modulus for the material?';
+h=input(prompt);
+prompt= 'What is the Yield Stress of the material?';
+o=input(prompt);
+c=de/2
+q=(k*l)/(2*r)
+t=(p/(a*h))
+b= sqrt(t)
+format long
+s=sec(q*t)
+format long
+y=s*(e*c)/(r^2);
+u=(1+y);
+f=((p/a)*u);
+temptext= ['Maximum Stress is', num2str(f),];
+disp(temptext);
+n=(o/f);
+temptext= ['New factor of safety is', num2str(n),];
+disp(temptext);
+m=e*(s-1);
+temptext= ['Deflection of the beam is', num2str(m),];
+disp(temptext);
