@@ -9,13 +9,13 @@ prompt='Enter Engine Speed';
 N=input(prompt);
 BP=(2*pi*N*BT)/(60*1000);
 %Calculating 5.Brake Mean Effective Pressure, bmep
-Vs=0.000382
+Vs=0.000382;
 bmep=(2*BP)/(Vs*(N/60)*1);
 %Calculating 2.Indicated Mean Effective Power, imep
 fmep=158.41;
-imep=bmep*fmep;
+imep=bmep+fmep;
 %Calculating Indicated Power (IP)
-IP=(imep*Vs)*(N/2);
+IP=((imep*Vs)*(N/(2*60)));
 %Calculating Friction Power, FP
 FP=IP-BP;
 %Calculating 6. Specific Fuel Consumption, SFC
@@ -26,16 +26,42 @@ x=10/ms;
 vf=x*0.0036
 sg=0.85;
 pf=0.85*1000
-mf=pf*vf;
+mf=pf*vf
 SFC=mf/BP;
 %Indicated thermal efficiency, ni
 ni=(3600*IP*100)/(mf*44000);
 %Calculating brake thermal efficiency, nb
-nb=(3600*BP)/(mf*44000);
+nb=(((3600*BP)/(mf*44000))*100);
 %Calculating Mechanical Efficiency, nm
-nm=nb/ni;
+nm=(nb/ni)*100;
 %Calculating mass flow rate of inlet air,
-pa=1.293*((101.6-(0.476*4.672)/101.3)*(273/(273+32.8))+(0.476*(1/
+prompt='Enter pressure difference';
+pd=input(prompt);
+pa=1.293*((101.6-(0.476*4.672))/101.3)*(273/(273+32.8))+(0.476/29.15)
+g=sqrt(2*pa*pd)
+h=g*0.822*0.973*0.000441*pi
+ma=h/4;
+%Calculating volumetric efficiency, nv
+nv=(ma*2*100)/(pa*Vs*(N/60));
+%Calculating air to fuel ratio
+af=(ma*3600)/mf;
+%Input power from fuel
+ipf=(mf*44000)/3600;
+%Heat loss to cooling water
+prompt='Enter cooling water outlet temperature';
+tout=input(prompt);
+prompt='Enter cooling water inlet temperature';
+tin=input(prompt);
+td=tout-tin
+hlcw=(995.2*0.000013889)*4.2*td;
+%Heat loss to exhaust gases
+prompt='Enter exhaust gas temperature';
+extemp=input(prompt);
+prompt='Enter section air temperature';
+suctiontemp=input(prompt);
+tu=extemp-suctiontemp;
+mg= ma+mf
+hleg=mg*1.11*tu;
 temptext=['The rate of fuel consumption is (Mf)', num2str(mf),];
 disp(temptext);
 temptext=['Brake Torque is', num2str(BT),];
@@ -46,7 +72,7 @@ temptext=['Break Mean Effective Powers(bmep) is', num2str(bmep),];
 disp(temptext);
 temptext=['Indicated Mean Effective Power (imep) is', num2str(imep),];
 disp(temptext);
-temptext=['Indicated Power (IP) is', num2str(ip),];
+temptext=['Indicated Power (IP) is', num2str(IP),];
 disp(temptext);
 temptext=['Friction Power (FP) is', num2str(FP),];
 disp(temptext);
@@ -58,5 +84,15 @@ temptext=['Brake Thermal Efficiency (nb)is', num2str(nb),];
 disp(temptext);
 temptext=['Mechanical Efficiency (nm) is', num2str(nm),];
 disp(temptext);
-
-
+temptext=['Mass Flow Rate of Inlet Air (ma) is', num2str(ma),];
+disp(temptext);
+temptext=['Volumetric Efficiency (nv) is', num2str(nv),];
+disp(temptext);
+temptext=['Air to fuel ratio (A/F) is', num2str(af),];
+disp(temptext);
+temptext=['Input power from fuel is', num2str(ipf),];
+disp(temptext);
+temptext=['Heat loss to cooling water is', num2str(hlcw),];
+disp(temptext);
+temptext=['Heat loss to exhaust gases is', num2str(hleg),];
+disp(temptext);
