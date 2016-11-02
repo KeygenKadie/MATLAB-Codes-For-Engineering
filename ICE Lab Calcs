@@ -59,9 +59,10 @@ prompt='Enter exhaust gas temperature';
 extemp=input(prompt);
 prompt='Enter section air temperature';
 suctiontemp=input(prompt);
-tu=extemp-suctiontemp;
-mg= ma+mf
-hleg=mg*1.11*tu;
+tu=extemp-suctiontemp
+hleg=ma*1.11*tu;
+%Other losses
+ol=ipf-BP-hlcw-hleg;
 temptext=['The rate of fuel consumption is (Mf)', num2str(mf),];
 disp(temptext);
 temptext=['Brake Torque is', num2str(BT),];
@@ -95,4 +96,6 @@ disp(temptext);
 temptext=['Heat loss to cooling water is', num2str(hlcw),];
 disp(temptext);
 temptext=['Heat loss to exhaust gases is', num2str(hleg),];
+disp(temptext);
+temptext=['Other losses is', num2str(ol),];
 disp(temptext);
