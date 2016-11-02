@@ -1,0 +1,36 @@
+clc
+%Calculating 1. Brake Torque
+prompt='Enter Load Value';
+F=input(prompt);
+L=0.2389;
+BT=F*L;
+temptext=['Brake Torque is', num2str(BT),];
+disp(temptext);
+%Calculating Brake Power, BP
+prompt='Enter Engine Speed';
+N=input(prompt);
+BP=(2*pi*N*BT)/(60*1000);
+temptext=['Brake Power is (BP)', num2str(BP),];
+disp(temptext);
+%Calculating 5.Brake Mean Effective Pressure, bmep
+Vs=0.000382
+bmep=(2*BP)/(Vs*(N/60)*1);
+temptext=['Break Mean Effective Power is (bmep)', num2str(bmep),];
+disp(temptext);
+%Calculating 6. Specific Fuel Consumption, SFC
+prompt='Enter the measuring time of the fuel';
+ms=input(prompt);
+%x is volumetric flow in ml/s
+x=10/ms;
+vf=x*0.0036
+sg=0.85;
+pf=0.85*1000
+mf=pf*vf;
+temptext=['The rate of fuel consumption is (Mf)', num2str(mf),];
+disp(temptext);
+SFC=mf/BP;
+temptext=['Specific Fuel Consumptionis(SFC)', num2str(SFC),];
+disp(temptext);
+
+
+
