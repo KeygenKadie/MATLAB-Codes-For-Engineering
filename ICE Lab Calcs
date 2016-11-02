@@ -4,19 +4,20 @@ prompt='Enter Load Value';
 F=input(prompt);
 L=0.2389;
 BT=F*L;
-temptext=['Brake Torque is', num2str(BT),];
-disp(temptext);
 %Calculating Brake Power, BP
 prompt='Enter Engine Speed';
 N=input(prompt);
 BP=(2*pi*N*BT)/(60*1000);
-temptext=['Brake Power is (BP)', num2str(BP),];
-disp(temptext);
 %Calculating 5.Brake Mean Effective Pressure, bmep
 Vs=0.000382
 bmep=(2*BP)/(Vs*(N/60)*1);
-temptext=['Break Mean Effective Power is (bmep)', num2str(bmep),];
-disp(temptext);
+%Calculating 2.Indicated Mean Effective Power, imep
+fmep=158.41;
+imep=bmep*fmep;
+%Calculating Indicated Power (IP)
+IP=(imep*Vs)*(N/2);
+%Calculating Friction Power, FP
+FP=IP-BP;
 %Calculating 6. Specific Fuel Consumption, SFC
 prompt='Enter the measuring time of the fuel';
 ms=input(prompt);
@@ -26,11 +27,36 @@ vf=x*0.0036
 sg=0.85;
 pf=0.85*1000
 mf=pf*vf;
+SFC=mf/BP;
+%Indicated thermal efficiency, ni
+ni=(3600*IP*100)/(mf*44000);
+%Calculating brake thermal efficiency, nb
+nb=(3600*BP)/(mf*44000);
+%Calculating Mechanical Efficiency, nm
+nm=nb/ni;
+%Calculating mass flow rate of inlet air,
+pa=1.293*((101.6-(0.476*4.672)/101.3)*(273/(273+32.8))+(0.476*(1/
 temptext=['The rate of fuel consumption is (Mf)', num2str(mf),];
 disp(temptext);
-SFC=mf/BP;
-temptext=['Specific Fuel Consumptionis(SFC)', num2str(SFC),];
+temptext=['Brake Torque is', num2str(BT),];
 disp(temptext);
-
+temptext=['Brake Power (BP) is', num2str(BP),];
+disp(temptext);
+temptext=['Break Mean Effective Powers(bmep) is', num2str(bmep),];
+disp(temptext);
+temptext=['Indicated Mean Effective Power (imep) is', num2str(imep),];
+disp(temptext);
+temptext=['Indicated Power (IP) is', num2str(ip),];
+disp(temptext);
+temptext=['Friction Power (FP) is', num2str(FP),];
+disp(temptext);
+temptext=['Specific Fuel Consumptionis(SFC) is', num2str(SFC),];
+disp(temptext);
+temptext=['Indicated thermal efficiency (ni) is', num2str(ni),];
+disp(temptext);
+temptext=['Brake Thermal Efficiency (nb)is', num2str(nb),];
+disp(temptext);
+temptext=['Mechanical Efficiency (nm) is', num2str(nm),];
+disp(temptext);
 
 
