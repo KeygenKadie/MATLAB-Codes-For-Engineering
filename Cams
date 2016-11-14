@@ -32,7 +32,7 @@ ylabel('Velocity','fontsize',10);
 title('Velocity for Rise','fontsize',15);
 
 %Acceleration
-a = ((pi^2*L)/(2*beta1r^2))*cos(pi*t1r/beta1r);
+a = ((pi^2*s)/(2*beta1r^2))*cos(pi*t1r/beta1r);
 ax3=subplot(3,1,3);
 plot(t1r,a);
 grid;
@@ -60,9 +60,9 @@ ylabel('Displacement','fontsize',10);
 title('Displacement For Return','fontsize',15);
 
 %Velocity
-v2 = (-(pi*L)/(2*beta2r))*sin(pi*t2r/beta2r);
+v2 = (-(pi*s)/(2*beta2r))*sin(pi*t2r/beta2r);
 ax5=subplot(3,1,2);
-plot(t2r,v2,'k-','linewidth',2);
+plot(t2r,v2);
 grid;
 set(gca,'fontsize',10);
 xlabel('Cam angle in radians','fontsize',10);
@@ -70,9 +70,9 @@ ylabel('Velocity','fontsize',10);
 title('Velocity For Return','fontsize',15);
 
 %Acceleration
-a2 = (-(pi^2*L)/(2*beta2r^2))*cos(pi*t2r/beta2r);
+a2 = (-(pi^2*s)/(2*beta2r^2))*cos(pi*t2r/beta2r);
 ax6=subplot(3,1,3);
-plot(t2r,a2,'k-','linewidth',2);
+plot(t2r,a2);
 grid;
 set(gca,'fontsize',10);
 xlabel('Cam angle in radians','fontsize',10);
