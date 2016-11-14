@@ -1,0 +1,82 @@
+%Scenario 1, SHM Rise and SHM return
+s = 0.03;       % Rise and return distance(mm)
+RAD = pi/180;   % Radian conversion factor
+DEG = 180/pi;   % Degree conversion factor
+STEP = 1;       % Cam angle stepsize (DEG)
+
+%For Rise
+beta1d = 75;            % Cam duration for rise (DEG)
+beta1r = beta1d*RAD;	% Cam duration for rise (RAD)
+
+t1d = [0:STEP:beta1d]';	% Cam angle from 0 to 75 degrees; column vector (')
+t1r = t1d*RAD;          % Convert to RAD
+
+%Displacement
+d = (s/2)*(1-cos(pi*t1r/beta1r));
+%Graph showing displacement (m) versus angle in radians
+ax1=subplot(3,1,1)
+plot(t1r,d);
+set(gca,'fontsize',10);
+xlabel('Cam angle in radians','fontsize',10);
+ylabel('Displacement','fontsize',10);
+title('Displacement for Rise','fontsize',15);
+
+%Velocity
+v = ((pi*s)/(2*beta1r))*sin(pi*t1r/beta1r);
+ax2=subplot(3,1,2);
+plot(t1r,v);
+grid;
+set(gca,'fontsize',10);
+xlabel('Cam angle in radians','fontsize',10);
+ylabel('Velocity','fontsize',10);
+title('Velocity for Rise','fontsize',15);
+
+%Acceleration
+a = ((pi^2*L)/(2*beta1r^2))*cos(pi*t1r/beta1r);
+ax3=subplot(3,1,3);
+plot(t1r,a);
+grid;
+set(gca,'fontsize',15);
+xlabel('Cam angle in radians','fontsize',10);
+ylabel('Acceleration','fontsize',10);
+title('Acceleration for Rise','fontsize',15);
+pause;
+delete(gcf);
+%Return
+beta2d = 135;           % Cam duration for segment 2 (DEG)
+beta2r = beta2d*RAD;	% Cam duration for segment 2 (RAD)
+
+t2d = [0:STEP:135]';	% Cam angle from 0 to 135 degrees; column vector (')
+t2r = t2d*RAD;          % Convert to RAD
+
+%Displacement
+d2 = (s/2)*(1+cos(pi*t2r/beta2r));
+ax4=subplot(3,1,1);
+plot(t2r,d2);
+grid;
+set(gca,'fontsize',10);
+xlabel('Cam angle in radians','fontsize',10);
+ylabel('Displacement','fontsize',10);
+title('Displacement For Return','fontsize',15);
+
+%Velocity
+v2 = (-(pi*L)/(2*beta2r))*sin(pi*t2r/beta2r);
+ax5=subplot(3,1,2);
+plot(t2r,v2,'k-','linewidth',2);
+grid;
+set(gca,'fontsize',10);
+xlabel('Cam angle in radians','fontsize',10);
+ylabel('Velocity','fontsize',10);
+title('Velocity For Return','fontsize',15);
+
+%Acceleration
+a2 = (-(pi^2*L)/(2*beta2r^2))*cos(pi*t2r/beta2r);
+ax6=subplot(3,1,3);
+plot(t2r,a2,'k-','linewidth',2);
+grid;
+set(gca,'fontsize',10);
+xlabel('Cam angle in radians','fontsize',10);
+ylabel('Acceleration','fontsize',10);
+title('Acceleration For Rise','fontsize',15);
+pause;
+delete(gcf);
