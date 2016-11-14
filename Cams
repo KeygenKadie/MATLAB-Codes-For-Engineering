@@ -1,5 +1,5 @@
 %Scenario 1, SHM Rise and SHM return
-s = 0.03;       % Rise and return distance(mm)
+s = 30;       % Rise and return distance(mm)
 RAD = pi/180;   % Radian conversion factor
 DEG = 180/pi;   % Degree conversion factor
 STEP = 1;       % Cam angle stepsize (DEG)
