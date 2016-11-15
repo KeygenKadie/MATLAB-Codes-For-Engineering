@@ -1,0 +1,23 @@
+%Scenario 1, SHM Rise and SHM return
+s = 30;         % The stroke of the motion event of the follower(mm)
+RAD = pi/180;   % Radian conversion factor
+DEG = 180/pi;   % Degree conversion factor
+w=100
+%Displacement
+beta1d = 75;            % The range of the rotary angle corresponding to the motion event (DEG)
+beta1r = beta1d*RAD;	% The range of the rotary angle corresponding to the motion event (RAD)
+
+t1d = linspace(0,75,76);	% The rotary angle of the cam, measured from the beginning of the motion event
+t1r = t1d*RAD;          % Convert to RAD
+c=t1r.^-1;
+t=t1r/w;
+k=t';
+%Rise
+d = (s/2)*(1-cos(pi*w*k*c));
+%Graph showing displacement (m) versus angle in radians
+ax1=subplot(3,1,1);
+plot(t1r,d);
+set(gca,'fontsize',10);
+xlabel('Cam angle in radians','fontsize',10);
+ylabel('Displacement','fontsize',10);
+title('Displacement for Rise For Scenario 1','fontsize',15);
