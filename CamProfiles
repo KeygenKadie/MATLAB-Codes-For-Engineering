@@ -1,0 +1,41 @@
+%Scenario 1
+s = 30;         % The stroke of the motion event of the follower(mm)
+RAD = pi/180;   % Radian conversion factor
+DEG = 180/pi;   % Degree conversion factor
+ 
+RTP=linspace(0,75,7);
+TDP=linspace(75,135,7);
+RTP2=linspace(135,240,7);
+BDP=linspace(240,360,7);
+p=linspace(0,135,7);
+Scenario1=[RTP,TDP,RTP2,BDP];
+ 
+%Displacement
+d = (s/2)*(1-cos(pi*RTP/75));              %Rise
+DispTopDwell=linspace(30,30,7);                %Top Dwell
+d2 = (s/2)*(1+cos(pi*p/135));                  %Return
+DispBottomDwell=linspace(0,0,7);               %Bottom Dwell
+ 
+%Drawing base radius
+RAD = pi/180;   % Radian conversion factor
+theta=linspace(0,2*pi);
+rho=35*sin(theta);
+ 
+theta1=RTP*RAD    %Rise
+rho1=d+35;
+ 
+theta2=linspace(75*RAD,135*RAD,7);
+rho2=linspace(65,65,7);
+ 
+theta3=linspace(135*RAD,240*RAD,7);
+rho3=d2+35;
+ 
+theta4=linspace(240*RAD,360*RAD,7);
+rho4=linspace(35,35,7);
+ 
+pls=[theta,theta1,theta2,theta3,theta4];
+work=[rho,rho1,rho2,rho3,rho4];
+polar(pls,work);
+ 
+ 
+%Scenario 2
