@@ -13,9 +13,9 @@ Scenario1=[RiseTerms,TopDwell,ReturnTerms,BottomDwell];
 
 %Displacement
 d = (s/2)*(1-cos(pi*RiseTerms/75));              %Rise
-DispTopDwell=linspace(30,30,31);                %Top Dwell
+DispTopDwell=linspace(30,30,31);                 %Top Dwell
 d2 = (s/2)*(1+cos(pi*pls/135));                  %Return
-DispBottomDwell=linspace(0,0,31);               %Bottom Dwell
+DispBottomDwell=linspace(0,0,31);                %Bottom Dwell
 Disp=[d,DispTopDwell,d2,DispBottomDwell];
 
 subplot(3,1,1);
@@ -28,7 +28,7 @@ title('Displacement for Scenario 1','fontsize',15');
 %Velocity
 dTheta=(5*pi/180);
 w=(100*pi/30);
-dt=(dTheta*w);
+dt=(dTheta/w);
 VelRise=gradient(d/dt);
 VelReturn=gradient(d2/dt);
 VelTopDwell=gradient(DispTopDwell/dt);
@@ -222,4 +222,3 @@ pls4=[theta,theta5,theta6,theta7,theta8];
 work4=[rho,rho5,rho6,rho7,rho8];
 polar(pls4,work4);
 title('Cam Profile for Scenario 4','fontsize',15');
- 
