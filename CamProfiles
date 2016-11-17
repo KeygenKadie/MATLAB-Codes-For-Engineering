@@ -24,18 +24,35 @@ rho=35*sin(theta);
 theta1=RTP*RAD    %Rise
 rho1=d+35;
  
-theta2=linspace(75*RAD,135*RAD,7);
+theta2=linspace(75*RAD,135*RAD,7);   %TopDwell
 rho2=linspace(65,65,7);
  
-theta3=linspace(135*RAD,240*RAD,7);
+theta3=linspace(135*RAD,240*RAD,7);  %Return
 rho3=d2+35;
  
-theta4=linspace(240*RAD,360*RAD,7);
+theta4=linspace(240*RAD,360*RAD,7);  %Bottom Dwell
 rho4=linspace(35,35,7);
  
 pls=[theta,theta1,theta2,theta3,theta4];
 work=[rho,rho1,rho2,rho3,rho4];
 polar(pls,work);
+pause;
  
+%Scenario 4
+theta5=RiseTerms*RAD    %Rise
+rho5=DispRise4+35;
  
-%Scenario 2
+theta6=TopDwell*RAD;   %TopDwell
+rho6=DispTopDwell4+35;
+ 
+theta7=ReturnTerms*RAD;  %Return
+rho7=DispReturn4+35;
+ 
+theta8=BottomDwell*RAD;  %Bottom Dwell
+rho8=DispBottomDwell4+35;
+ 
+pls2=[theta,theta5,theta6,theta7,theta8];
+work2=[rho,rho5,rho6,rho7,rho8];
+polar(pls2,work2);
+ 
+%Scenario 3
