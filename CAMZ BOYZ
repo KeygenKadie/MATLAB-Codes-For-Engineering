@@ -55,11 +55,51 @@ xlabel('Cam angle in degrees','fontsize',10);
 ylabel('Acceleration','fontsize',10);
 title('Acceleration for Scenario 1','fontsize',15');
 pause;
-delete(gcf);
 
 %Scenario 2
+%Check over angles and basically everything else in here
 %Displacement
+d6=(2*s)*(RiseTerms.^2)/(25.^2);
+DispTopDwell2=linspace(30,30,31);
+d7 = (s/2)*(1+cos(pi*pls/135));
+DispBottomDwell2=linspace(0,0,31);
 
+Disp2=[d6,DispTopDwell2,d7,DispBottomDwell2];
+
+subplot(3,1,1);
+plot(Scenario1,Disp);
+set(gca, 'fontsize', 10);
+xlabel('Cam angle in degrees','fontsize',10);
+ylabel('Displacement','fontsize',10);
+title('Displacement for Scenario 2','fontsize',15');
+
+%Velocity
+VelRise2=gradient(d7/dt);
+VelReturn2=gradient(d7/dt);
+VelTopDwell2=gradient(DispTopDwell2/dt);
+VelBottomDwell2=gradient(DispBottomDwell2/dt);
+
+Vel2=[VelRise2,VelTopDwell2,VelReturn2,VelBottomDwell2];
+subplot(3,1,2);
+plot(Scenario1,Vel2);
+set(gca, 'fontsize', 10);
+xlabel('Cam angle in degrees','fontsize',10);
+ylabel('Velocity','fontsize',10);
+title('Velocity for Scenario 2','fontsize',15');
+
+%Acceleration need to adjust this
+AccelRise=gradient(VelRise/dt);
+AccelReturn=gradient(VelReturn/dt);
+AccelTopDwell=gradient(VelTopDwell/dt);
+AccelBottomDwell=gradient(VelBottomDwell/dt);
+Accel=[AccelRise,AccelTopDwell,AccelReturn,AccelBottomDwell];
+subplot(3,1,3);
+plot(Scenario1,Accel);
+set(gca, 'fontsize', 10);
+xlabel('Cam angle in degrees','fontsize',10);
+ylabel('Acceleration','fontsize',10);
+title('Acceleration for Scenario 1','fontsize',15');
+pause;
 
 %Scenario 3
 %Displacement
