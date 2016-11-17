@@ -1,0 +1,20 @@
+%Scenario 1
+s = 30;         % The stroke of the motion event of the follower(mm)
+RAD = pi/180;   % Radian conversion factor
+DEG = 180/pi;   % Degree conversion factor
+
+RiseTerms=linspace(0,75,16);
+TopDwell=linspace(75,135,31);
+ReturnTerms=linspace(135,240,22);
+BottomDwell=linspace(240,360,31);
+pls=linspace(0,135,22);
+Scenario1=[RiseTerms,TopDwell,ReturnTerms,BottomDwell];
+%Displacement
+d = (s/2)*(1-cos(pi*RiseTerms/75))         %Rise
+DispTopDwell=linspace(30,30,31);           %Top Dwell
+d2 = (s/2)*(1+cos(pi*pls/135))    %Return
+DispBottomDwell=linspace(0,0,31);          %Bottom Dwell
+
+Disp=[d,DispTopDwell,d2,DispBottomDwell]
+
+plot(Scenario1,Disp);
