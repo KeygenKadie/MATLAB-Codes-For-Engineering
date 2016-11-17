@@ -1,4 +1,4 @@
-
+clc
 %Scenario 1
 s = 30;         % The stroke of the motion event of the follower(mm)
 RAD = pi/180;   % Radian conversion factor
@@ -168,7 +168,7 @@ RAD = pi/180;   % Radian conversion factor
 theta=linspace(0,2*pi);
 rho=35*sin(theta);
  
-theta1=RTP*RAD    %Rise
+theta1=RTP*RAD;    %Rise
 rho1=d+35;
  
 theta2=linspace(75*RAD,135*RAD,7);   %TopDwell
@@ -187,7 +187,7 @@ title('Cam Profile for Scenario 1','fontsize',15');
 pause;
 
 %Scenario 3
-theta9=RTP*RAD    %Rise
+theta9=RTP*RAD;    %Rise
 rho9=d4+35;
  
 theta10=linspace(75*RAD,135*RAD,7);   %TopDwell
@@ -206,7 +206,7 @@ title('Cam Profile for Scenario 3','fontsize',15');
 pause;
 
 %Scenario 4
-theta5=RiseTerms*RAD    %Rise
+theta5=RiseTerms*RAD;    %Rise
 rho5=DispRise4+35;
  
 theta6=TopDwell*RAD;   %TopDwell
