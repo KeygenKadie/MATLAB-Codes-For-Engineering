@@ -1,3 +1,4 @@
+clc
 %Scenario 1
 s = 30;         % The stroke of the motion event of the follower(mm)
 RAD = pi/180;   % Radian conversion factor
@@ -11,11 +12,11 @@ pls=linspace(0,135,22);
 Scenario1=[RiseTerms,TopDwell,ReturnTerms,BottomDwell];
 
 %Displacement
-d = (s/2)*(1-cos(pi*RiseTerms/75))              %Rise
+d = (s/2)*(1-cos(pi*RiseTerms/75));              %Rise
 DispTopDwell=linspace(30,30,31);                %Top Dwell
-d2 = (s/2)*(1+cos(pi*pls/135))                  %Return
+d2 = (s/2)*(1+cos(pi*pls/135));                  %Return
 DispBottomDwell=linspace(0,0,31);               %Bottom Dwell
-Disp=[d,DispTopDwell,d2,DispBottomDwell]
+Disp=[d,DispTopDwell,d2,DispBottomDwell];
 
 subplot(3,1,1);
 plot(Scenario1,Disp);
@@ -25,9 +26,9 @@ ylabel('Displacement','fontsize',10);
 title('Displacement for Scenario 1','fontsize',15');
 
 %Velocity
-dTheta=(5*pi/180)
-w=(100*pi/30)
-dt=(dTheta*w)
+dTheta=(5*pi/180);
+w=(100*pi/30);
+dt=(dTheta*w);
 VelRise=gradient(d/dt);
 VelReturn=gradient(d2/dt);
 VelTopDwell=gradient(DispTopDwell/dt);
@@ -64,9 +65,9 @@ delete(gcf);
 %Displacement
 d4 = (s/2)*(1-cos(pi*RiseTerms/75));
 DispTopDwell3=linspace(30,30,31);
-d5=linspace(30,0,22)
+d5=linspace(30,0,22);
 DispBottomDwell3=linspace(0,0,31);
-Disp3=[d4,DispTopDwell3,d5,DispBottomDwell3]
+Disp3=[d4,DispTopDwell3,d5,DispBottomDwell3];
 subplot(3,1,1);
 plot(Scenario1,Disp3);
 set(gca,'fontsize',10);
@@ -99,7 +100,7 @@ plot(Scenario1,Accel3);
 set(gca, 'fontsize', 10);
 xlabel('Cam angle in degrees','fontsize',10);
 ylabel('Acceleration','fontsize',10);
-title('Acceleration for Scenario 1','fontsize',15');
+title('Acceleration for Scenario 3','fontsize',15');
 pause;
 delete(gcf);
 
