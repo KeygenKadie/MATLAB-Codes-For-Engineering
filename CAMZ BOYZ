@@ -9,12 +9,47 @@ ReturnTerms=linspace(135,240,22);
 BottomDwell=linspace(240,360,31);
 pls=linspace(0,135,22);
 Scenario1=[RiseTerms,TopDwell,ReturnTerms,BottomDwell];
-%Displacement
-d = (s/2)*(1-cos(pi*RiseTerms/75))         %Rise
-DispTopDwell=linspace(30,30,31);           %Top Dwell
-d2 = (s/2)*(1+cos(pi*pls/135))    %Return
-DispBottomDwell=linspace(0,0,31);          %Bottom Dwell
 
+%Displacement
+d = (s/2)*(1-cos(pi*RiseTerms/75))              %Rise
+DispTopDwell=linspace(30,30,31);                %Top Dwell
+d2 = (s/2)*(1+cos(pi*pls/135))                  %Return
+DispBottomDwell=linspace(0,0,31);               %Bottom Dwell
 Disp=[d,DispTopDwell,d2,DispBottomDwell]
 
+subplot(3,1,1);
 plot(Scenario1,Disp);
+set(gca, 'fontsize', 10);
+xlabel('Cam angle in degrees','fontsize',10);
+ylabel('Displacement','fontsize',10);
+title('Displacement for Scenario 1','fontsize',15');
+
+%Velocity
+dTheta=(5*pi/180)
+w=(100*pi/30)
+dt=(dTheta*w)
+VelRise=gradient(d/dt);
+VelReturn=gradient(d2/dt);
+VelTopDwell=gradient(DispTopDwell/dt);
+VelBottomDwell=gradient(DispBottomDwell/dt);
+
+Vel=[VelRise,VelTopDwell,VelReturn,VelBottomDwell];
+subplot(3,1,2);
+plot(Scenario1,Vel);
+set(gca, 'fontsize', 10);
+xlabel('Cam angle in degrees','fontsize',10);
+ylabel('Velocity','fontsize',10);
+title('Velocity for Scenario 1','fontsize',15');
+
+%Acceleration
+AccelRise=gradient(VelRise/dt);
+AccelReturn=gradient(VelReturn/dt);
+AccelTopDwell=gradient(VelTopDwell/dt);
+AccelBottomDwell=gradient(VelBottomDwell/dt);
+Accel=[AccelRise,AccelTopDwell,AccelReturn,AccelBottomDwell];
+subplot(3,1,3);
+plot(Scenario1,Accel);
+set(gca, 'fontsize', 10);
+xlabel('Cam angle in degrees','fontsize',10);
+ylabel('Acceleration','fontsize',10);
+title('Acceleration for Scenario 1','fontsize',15');
