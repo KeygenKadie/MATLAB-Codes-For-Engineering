@@ -166,7 +166,7 @@ DispBottomDwell=linspace(0,0,7);               %Bottom Dwell
 %Drawing base radius
 RAD = pi/180;   % Radian conversion factor
 theta=linspace(0,2*pi);
-rho=35*sin(theta);
+rho=linspace(35,35);
  
 theta1=RTP*RAD;    %Rise
 rho1=d+35;
