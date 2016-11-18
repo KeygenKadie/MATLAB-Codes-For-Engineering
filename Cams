@@ -57,7 +57,62 @@ title('Acceleration for Scenario 1','fontsize',15');
 pause;
 
 %Scenario 2
+s=30;
+AccRiseTerms=linspace(0,25,16);
+DeccRiseTerms=linspace(25,75,16);
+TopDwell=linspace(75,135,31);
+ReturnTerms=linspace(135,240,22);
+BottomDwell=linspace(240,360,31);
+pls=linspace(0,135,22);
 
+Scenario2=[AccRiseTerms,DeccRiseTerms,TopDwell,ReturnTerms,BottomDwell];
+
+%Displacement
+dacc=(2*s)*((AccRiseTerms/75).^2);
+theta=1-(DeccRiseTerms/75);
+thetas=theta.^2;
+ddecc=s*(1-(2*thetas));
+DispTopDwell2=linspace(30,30,31);
+d3=(s/2)*(1+cos(pi*pls/135));
+DispBottomDwell2=linspace(0,0,31);
+Disp2=[dacc,ddecc,DispTopDwell2,d3,DispBottomDwell2];
+
+subplot(3,1,1);
+plot(Scenario2,Disp2);
+set(gca, 'fontsize', 10);
+xlabel('Cam angle in degrees','fontsize',10);
+ylabel('Displacement','fontsize',10);
+title('Displacement for Scenario 2','fontsize',15');
+
+%Velocity
+VelRiseAcc2=gradient(dacc/dt);
+VelRiseDecc2=gradient(ddecc/dt);
+VelReturn2=gradient(d3/dt);
+VelTopDwell2=gradient(DispTopDwell2/dt);
+VelBottomDwell2=gradient(DispBottomDwell2/dt);
+
+Vel2=[VelRiseAcc2,VelRiseDecc2,VelTopDwell2,VelReturn2,VelBottomDwell2];
+subplot(3,1,2);
+plot(Scenario2,Vel2);
+set(gca, 'fontsize', 10);
+xlabel('Cam angle in degrees','fontsize',10);
+ylabel('Velocity','fontsize',10);
+title('Veloctiy for Scenario 2','fontsize',15');
+
+%Acceleration
+AccelRiseAcc2=gradient(VelRiseAcc2/dt);
+AccelRiseDec2=gradient(VelRiseDecc2/dt);
+AccelReturn2=gradient(VelReturn2/dt);
+AccelTopDwell2=gradient(VelTopDwell2/dt);
+AccelBottomDwell2=gradient(VelBottomDwell2/dt);
+Accel2=[AccelRiseAcc2, AccelRiseDec2,AccelTopDwell2,AccelReturn2,AccelBottomDwell2];
+subplot(3,1,3);
+plot(Scenario2,Accel2);
+set(gca, 'fontsize', 10);
+xlabel('Cam angle in degrees','fontsize',10);
+ylabel('Acceleration','fontsize',10);
+title('Acceleration for Scenario 2','fontsize',15');
+pause;
 
 %Scenario 3
 %Displacement
@@ -158,10 +213,9 @@ p=linspace(0,135,7);
 
  
 %Displacement
-d = (s/2)*(1-cos(pi*RTP/75));              %Rise
+t1r = (s/2)*(1-cos(pi*RTP/75));              %Rise
 DispTopDwell=linspace(30,30,7);                %Top Dwell
-d2 = (s/2)*(1+cos(pi*p/135));                  %Return
-DispBottomDwell=linspace(0,0,7);               %Bottom Dwell
+t2r = (s/2)*(1+cos(pi*p/135));                  %Return               %Bottom Dwell
  
 %Drawing base radius
 RAD = pi/180;   % Radian conversion factor
@@ -173,13 +227,13 @@ theta20=linspace(0,2*pi);
 rho20=linspace(35,35);
 
 theta1=RTP*RAD;    %Rise
-rho1=d+35;
+rho1=t1r+35;
  
 theta2=linspace(75*RAD,135*RAD,7);   %TopDwell
 rho2=linspace(65,65,7);
  
 theta3=linspace(135*RAD,240*RAD,7);  %Return
-rho3=d2+35;
+rho3=t2r+35;
  
 theta4=linspace(240*RAD,360*RAD,7);  %Bottom Dwell
 rho4=linspace(35,35,7);
@@ -188,6 +242,33 @@ pls1=[theta,theta1,theta2,theta3,theta4];
 work=[rho,rho1,rho2,rho3,rho4];
 polar(pls1,work);
 title('Cam Profile for Scenario 1','fontsize',15');
+pause;
+
+%Scenario 2
+RTPA=linspace(0,25,7);
+RTPD=linspace(25,75,7);
+TDP2=linspace(75,135,7);
+RTP2=linspace(135,240,7);
+BTD2=linspace(240,360,7);
+
+theta21=RTPA*RAD;   %AccRise
+rho21=dacc+35;
+
+theta22=linspace(25*RAD,75*RAD,7);  %DecRise
+rho22=ddecc+35;
+
+theta23=linspace(75*RAD,135*RAD,7);  %Dwell
+rho23=linspace(65,65,7);
+
+theta24=linspace(135*RAD,240*RAD,7); %Return
+rho24=d3+35;
+
+theta25=linspace(240*RAD,360*RAD,7); %Dwell
+rho25=linspace(35,35,7);
+
+pls25=[theta21,theta22,theta23,theta24,theta25];
+work25=[rho21,rho22,rho23,rho24,rho25];
+polar(pls25,work25);
 pause;
 
 %Scenario 3
@@ -275,4 +356,3 @@ temptext=['For Uniform Velocity,the acceleration is zero and therefore the force
 disp(temptext);
 temptext=['Equivalently Force at the top of the return during uniform velocity=  ',num2str(DwellF),];
 disp(temptext);
-
