@@ -167,7 +167,11 @@ DispBottomDwell=linspace(0,0,7);               %Bottom Dwell
 RAD = pi/180;   % Radian conversion factor
 theta=linspace(0,2*pi);
 rho=linspace(35,35);
- 
+
+%Maximum radius
+theta20=linspace(0,2*pi);
+rho20=linspace(35,35);
+
 theta1=RTP*RAD;    %Rise
 rho1=d+35;
  
@@ -218,8 +222,8 @@ rho7=DispReturn4+35;
 theta8=BottomDwell*RAD;  %Bottom Dwell
 rho8=DispBottomDwell4+35;
  
-pls4=[theta,theta5,theta6,theta7,theta8];
-work4=[rho,rho5,rho6,rho7,rho8];
+pls4=[theta,theta5,theta6,theta7,theta8,theta20];
+work4=[rho,rho5,rho6,rho7,rho8,rho20];
 polar(pls4,work4);
 title('Cam Profile for Scenario 4','fontsize',15');
  
