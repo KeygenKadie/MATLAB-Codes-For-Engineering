@@ -317,6 +317,7 @@ TRr=(7*pi/12); %Angle of Return
 FSA=45; % Assumed Fspring
 k=250; %Assumed Spring Constant
 Me=3.1; % Effective Mass
+temptext=[' Fspring was assumed to be 45N and the spring constant, k, was assumed to be 250N/cm']
 
 AR1=(pi*w/TR).^2;
 AccelBRise=(AR1*s/2);
