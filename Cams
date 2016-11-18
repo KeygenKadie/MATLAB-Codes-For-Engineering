@@ -222,3 +222,53 @@ pls4=[theta,theta5,theta6,theta7,theta8];
 work4=[rho,rho5,rho6,rho7,rho8];
 polar(pls4,work4);
 title('Cam Profile for Scenario 4','fontsize',15');
+ 
+%Part zz
+w1=(100*pi/30); %Angular Speed
+s=0.03; %Displacement of the follower
+TR=(5*pi/12); %Angle of Rise
+TRr=(7*pi/12); %Angle of Return
+FSA=45; % Assumed Fspring
+k=250; %Assumed Spring Constant
+Me=3.1; % Effective Mass
+
+AR1=(pi*w/TR).^2;
+AccelBRise=(AR1*s/2);
+ma1=(3.1*AccelBRise);
+Fc1=(ma1+FSA);
+temptext=['For Simple Harmonic Rise, the force(N) on the cam at the beginning of the rise is= ',num2str(Fc1),];
+disp(temptext);
+DwellF=(FSA+s*k); %Force on cam at Dwell
+Fc2=(DwellF-ma1);
+temptext=['For Simple Harmonic Rise, the force(N) on the cam at the top of the rise is= ',num2str(Fc2),];
+disp(temptext);
+AR2=(pi*w/TRr).^2;
+AccelBReturn=(AR2*s/2);
+ma2=(3.1*AccelBReturn);
+Fc3=(ma2+FSA);
+temptext=['For Simple Harmonic Rise, the force(N) on the cam at the bottom of the return is= ',num2str(Fc3),];
+disp(temptext);
+Fc4=(DwellF+ma2);
+temptext=['For Simple Harmonic Rise, the force(N) on the cam at the top of the return is= ',num2str(Fc4),];
+disp(temptext);
+temptext=['Force(N) on the Cam during dwell is=  ',num2str(DwellF),];
+disp(temptext);
+
+Theta1=(5*pi/36);
+TTR=(TR*Theta1);
+w2=(w.^2);
+A1=(2*w2*s/TTR);
+A2=(-2*A1);
+ma3=(Me*A2);
+Fc5=(FSA+ma3);
+temptext=['For Uniform Acceleration/Deceleration, the force(N) on the cam at the beginning of the rise is= ',num2str(Fc5),];
+disp(temptext);
+Fc6=(DwellF+ma3);
+temptext=['For Uniform Acceleration/Deceleration, the force(N) on the cam at the top of the rise is= ',num2str(Fc5),];
+disp(temptext);
+
+temptext=['For Uniform Velocity,the acceleration is zero and therefore the force(N) on the cam at the tbottom of the return is= ',num2str(FSA),];
+disp(temptext);
+temptext=['Equivalently Force at the top of the return during uniform velocity=  ',num2str(DwellF),];
+disp(temptext);
+
