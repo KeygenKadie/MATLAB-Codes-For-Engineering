@@ -57,9 +57,8 @@ title('Acceleration for Scenario 1','fontsize',15');
 pause;
 
 %Scenario 2
-s=30;
-AccRiseTerms=linspace(0,25,16);
-DeccRiseTerms=linspace(25,75,16);
+AccRiseTerms=linspace(0,25,8);
+DeccRiseTerms=linspace(25,75,8);
 TopDwell=linspace(75,135,31);
 ReturnTerms=linspace(135,240,22);
 BottomDwell=linspace(240,360,31);
@@ -245,30 +244,32 @@ title('Cam Profile for Scenario 1','fontsize',15');
 pause;
 
 %Scenario 2
-RTPA=linspace(0,25,7);
-RTPD=linspace(25,75,7);
+RTPA=linspace(0,25,8);
+RTPD=linspace(25,75,8);
 TDP2=linspace(75,135,7);
 RTP2=linspace(135,240,7);
 BTD2=linspace(240,360,7);
 
-theta21=RTPA*RAD;   %AccRise
-rho21=dacc+35;
+risedisp2=[dacc,ddecc];
+risetheta2=[RTPA,RTPD];
 
-theta22=linspace(25*RAD,75*RAD,7);  %DecRise
-rho22=ddecc+35;
+theta21=risetheta2*RAD;   %AccRise
+rho21=risedisp2+35;
 
 theta23=linspace(75*RAD,135*RAD,7);  %Dwell
 rho23=linspace(65,65,7);
 
 theta24=linspace(135*RAD,240*RAD,7); %Return
-rho24=d3+35;
+rho24=t2r+35;
+
 
 theta25=linspace(240*RAD,360*RAD,7); %Dwell
 rho25=linspace(35,35,7);
 
-pls25=[theta21,theta22,theta23,theta24,theta25];
-work25=[rho21,rho22,rho23,rho24,rho25];
+pls25=[theta,theta21,theta23,theta24,theta25];
+work25=[rho,rho21,rho23,rho24,rho25];
 polar(pls25,work25);
+title('Cam Profile for Scenario 2','fontsize',15');
 pause;
 
 %Scenario 3
